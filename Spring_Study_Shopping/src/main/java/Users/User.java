@@ -1,10 +1,13 @@
 package Users;
 
-import jakarta.persistence.Entity;
+import Items.CartItem;
+import Order.Order;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 //import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 
 //@EnableAspectJAutoProxy
 @Entity
@@ -16,6 +19,12 @@ public class User {
     private String password;
     private String email;
     private String name;
+
+    @OneToMany(mappedBy="user")
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 
     //getter
     public String getId() {return id;}
